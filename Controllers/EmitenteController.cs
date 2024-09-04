@@ -21,6 +21,7 @@ namespace NFeApi.Controllers
         }
 
         [HttpGet]
+        [Produces("application/xml")]
         public async Task<ActionResult<IEnumerable<EmitenteDto>>> GetEmitentes()
         {
             var emitente = await _context.Emitentes.ToListAsync();
@@ -29,6 +30,7 @@ namespace NFeApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Produces("application/xml")]
         public async Task<ActionResult<Emitente>> GetEmitente(int id)
         {
             var emitente = await _context.Emitentes.FindAsync(id);
@@ -42,6 +44,7 @@ namespace NFeApi.Controllers
         }
 
         [HttpPost]
+        [Produces("application/xml")]
         public async Task<ActionResult<EmitenteDto>> CreateEmitente(EmitenteDto emitenteDto)
         {
             var emitente = _mapper.Map<Emitente>(emitenteDto);

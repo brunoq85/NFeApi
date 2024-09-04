@@ -21,6 +21,7 @@ namespace NFeApi.Controllers
         }
 
         [HttpGet]
+        [Produces("application/xml")]
         public async Task<ActionResult<IEnumerable<NFeDto>>> GetNFes()
         {
             var nfes = await _context.NFes.Include(n => n.Emitente).Include(n => n.ItensNFe).ToListAsync();
@@ -29,6 +30,7 @@ namespace NFeApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Produces("application/xml")]
         public async Task<ActionResult<NFeDto>> GetNFe(int id)
         {
             var nfe = await _context.NFes.Include(n => n.Emitente).Include(n => n.ItensNFe).FirstOrDefaultAsync(n => n.Id == id);
@@ -42,6 +44,7 @@ namespace NFeApi.Controllers
         }
 
         [HttpPost]
+        [Produces("application/xml")]
         public async Task<ActionResult<NFeDto>> CreateNFe(NFeDto nfeDto)
         {
             var nfe = _mapper.Map<NFe>(nfeDto);

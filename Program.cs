@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NFeApi.AutoMapper;
 using NFeApi.Context;
@@ -14,11 +15,15 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddControllers().AddXmlSerializerFormatters();
 
-builder.Services.AddControllers();
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(new ProducesAttribute("application/xml"));
+})
+.AddXmlDataContractSerializerFormatters();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 var app = builder.Build();
 
